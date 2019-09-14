@@ -1,18 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const keys = require('./config/keys');
 //const User = require('./models/User');
 //const router = express.Router();
 
 //database connection details
-const db = "mongodb+srv://kibet:isaiah@cluster0-tjbew.mongodb.net/test?retryWrites=true&w=majority"
+const db = keys.mongoURI;
 
 //to connect to database
 mongoose.connect(db, {}).then(() => console.log("DB connected")).catch(err => console.log(err));
 
 const app = express();
 //configure body parser
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 //app.use(bodyParser.urlencoded({extended: false}));
 /**
  * post route for register a new user
@@ -24,7 +25,7 @@ app.use(bodyParser.urlencoded({extended: false}));
  * @param {name} name - of the user
  **/
 //User routes
-const userRoutes=  require('./routes/User');
+const userRoutes = require('./routes/User');
 app.use('/users', userRoutes);
 
 
